@@ -47,6 +47,9 @@ public class ModelPermGroup implements Serializable {
                 Map<String, Object> permResult = perm.evalPermission(dctx, context);
                 if (ServiceUtil.isSuccess(permResult)) {
                     foundOne = true;
+                    if (joinType.equals(PERM_JOIN_OR)) {
+                        return true;
+                    }
                 } else {
                     ServiceUtil.addErrors(permissionErrors, null, permResult);
                     if (joinType.equals(PERM_JOIN_AND)) {
